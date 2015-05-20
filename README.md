@@ -1,9 +1,9 @@
 openwrt-hc5761
 ==============
 
-OpenWrt Patch for HiWiFi HC5761 / HC5661 (based on "barrier_breaker" branch)
+OpenWrt Patch for HiWiFi HC5761 / HC5661 (base on trunk - chaos_calmer)
 
-极路由 HC5761 / HC5661（极壹、极贰、极壹S）OpenWrt补丁（基于barrier_breaker分支）
+极路由 HC5761 / HC5661 / HC5661（极壹、极贰、极壹S）OpenWrt补丁（基于trunk - chaos_calmer版本）
 
 ### 关于极贰
 * 极贰官方产品页：http://www.hiwifi.com/j2
@@ -19,7 +19,7 @@ OpenWrt Patch for HiWiFi HC5761 / HC5661 (based on "barrier_breaker" branch)
 * 2.4G Wi-Fi驱动支持;
 * SD卡驱动支持;
 * USB驱动支持;
-* 注意：HC5761（极2）的5G Wi-Fi（MT7610E）驱动暂未有开源支持，Releases中可下载到编译好的已带5G驱动的固件，但由于MTK版权限制本项目不提供其源代码。
+* 注意：HC5761（极2）的5G Wi-Fi（MT7610E）驱动暂未有开源支持。
 
 #### 编译好的固件下载
  * 请在本项目的Releases下载。
@@ -30,8 +30,8 @@ OpenWrt Patch for HiWiFi HC5761 / HC5661 (based on "barrier_breaker" branch)
     sudo apt-get install build-essential git subversion wget flex gettext libncurses5-dev unzip gawk liblzma-dev u-boot-tools
     
     # 编译
-    git clone https://github.com/rssnsj/openwrt-hc5761.git
-    cd openwrt-hc5761
+    git clone https://github.com/rssnsj/openwrt-hc5761.git -b chaos_calmer openwrt-hc5761-cc
+    cd openwrt-hc5761-cc
     make
 
 #### 说明
