@@ -2,7 +2,7 @@ Index: target/linux/ramips/image/Makefile
 ===================================================================
 --- target/linux/ramips/image/Makefile	(revision 45669)
 +++ target/linux/ramips/image/Makefile	(working copy)
-@@ -852,5 +852,7 @@
+@@ -852,6 +852,8 @@
  na930_mtd_size=20971520
  Image/Build/Profile/NA930=$(call BuildFirmware/CustomFlash/$(1),$(1),na930,NA930,$(na930_mtd_size))
  Image/Build/Profile/MZK-750DHP=$(call BuildFirmware/Default8M/$(1),$(1),mzk-750dhp,MZK-750DHP)
@@ -10,7 +10,8 @@ Index: target/linux/ramips/image/Makefile
 +Image/Build/Profile/HiWiFi-HC5861=$(call BuildFirmware/Default16M/$(1),$(1),hiwifi-hc5861,HiWiFi-HC5861)
  Image/Build/Profile/Y1=$(call BuildFirmware/Default16M/$(1),$(1),Lenovo-y1,Y1)
  Image/Build/Profile/Y1S=$(call BuildFirmware/Default16M/$(1),$(1),Lenovo-y1s,Y1S)
-@@ -884,5 +885,7 @@
+ Image/Build/Profile/MLW221=$(call BuildFirmware/Default16M/$(1),$(1),mlw221,MLW221)
+@@ -884,6 +886,8 @@
  	$(call Image/Build/Profile/WHR1166D,$(1))
  	$(call Image/Build/Profile/MZK-750DHP,$(1))
  	$(call Image/Build/Profile/NA930,$(1))
@@ -18,6 +19,7 @@ Index: target/linux/ramips/image/Makefile
 +	$(call Image/Build/Profile/HiWiFi-HC5861,$(1))
  	$(call Image/Build/Profile/Y1,$(1))
  	$(call Image/Build/Profile/Y1S,$(1))
+ 	$(call Image/Build/Profile/MLW221,$(1))
 Index: target/linux/ramips/dts/HiWiFi-HC5761.dts
 ===================================================================
 --- target/linux/ramips/dts/HiWiFi-HC5761.dts	(revision 0)
