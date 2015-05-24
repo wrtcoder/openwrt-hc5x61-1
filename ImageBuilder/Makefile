@@ -17,7 +17,7 @@ OPKG_PACKAGES :=  6in4 6to4 blkid curl ethtool fdisk ip ip6tables-extra ip6table
 	samba36-server terminfo zlib luci-i18n-base-zh-cn luci-i18n-commands-zh-cn \
 	luci-i18n-diag-core-zh-cn luci-i18n-firewall-zh-cn luci-i18n-qos-zh-cn luci-i18n-samba-zh-cn \
 	ppp-mod-pptp ppp-mod-pppol2tp kmod-nls-cp437 kmod-nls-iso8859-1 kmod-nls-utf8 \
-	kmod-crypto-deflate kmod-usb-ohci kmod-usb-printer
+	kmod-crypto-deflate kmod-usb-ohci kmod-usb-printer kmod-nf-nathelper kmod-nf-nathelper-extra
 OPKG_PACKAGES_HC5761 :=
 OPKG_PACKAGES_HC5861 :=
 PREPARED_TARGETS = .check_ib .patched
