@@ -7,10 +7,16 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=mt7610e
-P4REV:=110971
-PKG_VERSION:=p4rev-$(P4REV)
+PKG_REV:=5
+PKG_VERSION:=$(PKG_REV)
+PKG_RELEASE:=20150604
+
+PKG_SOURCE_PROTO:=svn
+PKG_SOURCE_VERSION:=$(PKG_REV)
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_URL:=https://github.com/i80s/mtk-sources/trunk/mt7610e
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=http://localhost/
+
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_KCONFIG:= \
@@ -23,8 +29,6 @@ PKG_KCONFIG:= \
 PKG_CONFIG_DEPENDS:=$(foreach c, $(PKG_KCONFIG),$(if $(CONFIG_$c),CONFIG_$(c)))
 
 include $(INCLUDE_DIR)/package.mk
-
-TAR_CMD=$(HOST_TAR) -C $(1)/ $(TAR_OPTIONS)
 
 define KernelPackage/mt7610e
   CATEGORY:=Ralink Properties
