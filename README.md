@@ -36,7 +36,7 @@ OpenWrt Patch for HiWiFi HC5661 / HC5761 / HC5861 (based on "chaos_calmer" branc
     sudo apt-get install build-essential git subversion wget flex gettext libncurses5-dev unzip gawk liblzma-dev zlib1g-dev ccache u-boot-tools
       
     # Checkout项目代码
-    git clone https://github.com/rssnsj/openwrt-hc5x61.git -b chaos_calmer openwrt-hc5761-cc
+    git clone https://github.com/rssnsj/openwrt-hc5x61.git -b chaos_calmer openwrt-hc5x61-cc
 
 #### 固件生成方法1 - 编译
 
