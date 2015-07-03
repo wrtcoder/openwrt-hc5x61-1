@@ -2,21 +2,23 @@ Index: target/linux/ramips/image/Makefile
 ===================================================================
 --- target/linux/ramips/image/Makefile	(revision 45974)
 +++ target/linux/ramips/image/Makefile	(working copy)
-@@ -864,6 +864,8 @@
+@@ -864,6 +864,9 @@
  na930_mtd_size=20971520
  Image/Build/Profile/NA930=$(call BuildFirmware/CustomFlash/$(1),$(1),na930,NA930,$(na930_mtd_size))
  Image/Build/Profile/MZK-750DHP=$(call BuildFirmware/Default8M/$(1),$(1),mzk-750dhp,MZK-750DHP)
 +Image/Build/Profile/HiWiFi-HC5761=$(call BuildFirmware/Default16M/$(1),$(1),hiwifi-hc5761,HiWiFi-HC5761)
 +Image/Build/Profile/HiWiFi-HC5861=$(call BuildFirmware/Default16M/$(1),$(1),hiwifi-hc5861,HiWiFi-HC5861)
++Image/Build/Profile/HiWiFi-HC5761A=$(call BuildFirmware/Default16M/$(1),$(1),hiwifi-hc5761a,HiWiFi-HC5761A)
  Image/Build/Profile/Y1=$(call BuildFirmware/Default16M/$(1),$(1),Lenovo-y1,Y1)
  Image/Build/Profile/Y1S=$(call BuildFirmware/Default16M/$(1),$(1),Lenovo-y1s,Y1S)
  Image/Build/Profile/MLW221=$(call BuildFirmware/Default16M/$(1),$(1),mlw221,MLW221)
-@@ -897,6 +899,8 @@
+@@ -897,6 +900,9 @@
  	$(call Image/Build/Profile/WHR1166D,$(1))
  	$(call Image/Build/Profile/MZK-750DHP,$(1))
  	$(call Image/Build/Profile/NA930,$(1))
 +	$(call Image/Build/Profile/HiWiFi-HC5761,$(1))
 +	$(call Image/Build/Profile/HiWiFi-HC5861,$(1))
++	$(call Image/Build/Profile/HiWiFi-HC5761A,$(1))
  	$(call Image/Build/Profile/Y1,$(1))
  	$(call Image/Build/Profile/Y1S,$(1))
  	$(call Image/Build/Profile/MLW221,$(1))
@@ -447,7 +449,7 @@ Index: target/linux/ramips/base-files/lib/ramips.sh
 ===================================================================
 --- target/linux/ramips/base-files/lib/ramips.sh	(revision 45974)
 +++ target/linux/ramips/base-files/lib/ramips.sh	(working copy)
-@@ -397,6 +397,12 @@
+@@ -397,6 +397,15 @@
  	*"ZTE Q7")
  		name="zte-q7"
  		;;
@@ -456,6 +458,9 @@ Index: target/linux/ramips/base-files/lib/ramips.sh
 +		;;
 +	*"HiWiFi HC5861")
 +		name="hiwifi-hc5861"
++		;;
++	*"HiWiFi HC5761A")
++		name="hiwifi-hc5761a"
 +		;;
  	*"Lenovo Y1")
  		name="y1"
@@ -468,7 +473,7 @@ Index: target/linux/ramips/base-files/lib/upgrade/platform.sh
  	x5 |\
  	x8 |\
  	xiaomi-miwifi-mini |\
-+	hiwifi-hc5*61 |\
++	hiwifi-hc5*61 | hiwifi-hc5761a \
  	y1 |\
  	y1s |\
  	zte-q7 |\
@@ -480,7 +485,7 @@ Index: target/linux/ramips/base-files/etc/board.d/01_leds
  		set_usb_led "wr8305rt:usb"
  		set_wifi_led "wr8305rt:wifi"
  		;;
-+	hiwifi-hc5761)
++	hiwifi-hc5761|hiwifi-hc5761a)
 +		ucidef_set_led_default "system" "system" "hiwifi:blue:system" "1"
 +		ucidef_set_led_netdev "internet" "internet" "hiwifi:blue:internet" "eth0.2"
 +		set_wifi_led "hiwifi:blue:wlan-2p4"
@@ -504,7 +509,7 @@ Index: target/linux/ramips/base-files/etc/board.d/02_network
  		ucidef_add_switch_vlan "switch0" "2" "4 6t"
  		;;
  
-+	hiwifi-hc5*61 |\
++	hiwifi-hc5*61 | hiwifi-hc5761a \
  	y1s)
  		ucidef_set_interfaces_lan_wan "eth0.1" "eth0.2"
  		ucidef_add_switch "switch0" "1" "1"
@@ -512,7 +517,7 @@ Index: target/linux/ramips/base-files/etc/board.d/02_network
  		wan_mac=$(macaddr_add "$lan_mac" 1)
  		;;
  
-+	hiwifi-hc5*61)
++	hiwifi-hc5*61 | hiwifi-hc5761a)
 +		__fac_mac=`strings /dev/mtd8 | grep 'fac_mac = ..:..:..:..:..:..'`
 +		lan_mac=`expr "$__fac_mac" : '.*\(..:..:..:..:..:..\)' | tr '[A-Z]' '[a-z]'`
 +		[ -n "$lan_mac" ] || lan_mac=$(cat /sys/class/net/eth0/address)
@@ -530,7 +535,7 @@ Index: target/linux/ramips/base-files/etc/diag.sh
  	na930)
  		status_led="na930:blue:power"
  		;;
-+	hiwifi-hc5*61)
++	hiwifi-hc5*61 | hiwifi-hc5761a)
 +		status_led="hiwifi:blue:system"
 +		;;
  	y1 | \
