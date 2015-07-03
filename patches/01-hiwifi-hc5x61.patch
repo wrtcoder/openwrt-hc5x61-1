@@ -1,6 +1,6 @@
 Index: target/linux/ramips/image/Makefile
 ===================================================================
---- target/linux/ramips/image/Makefile	(revision 46160)
+--- target/linux/ramips/image/Makefile	(revision 46159)
 +++ target/linux/ramips/image/Makefile	(working copy)
 @@ -866,6 +866,8 @@
  na930_mtd_size=20971520
@@ -445,7 +445,7 @@ Index: target/linux/ramips/mt7620/profiles/HiWiFi-HC5861.mk
 +$(eval $(call Profile,HiWiFi-HC5861))
 Index: target/linux/ramips/base-files/lib/ramips.sh
 ===================================================================
---- target/linux/ramips/base-files/lib/ramips.sh	(revision 46160)
+--- target/linux/ramips/base-files/lib/ramips.sh	(revision 46159)
 +++ target/linux/ramips/base-files/lib/ramips.sh	(working copy)
 @@ -406,6 +406,12 @@
  	*"ZTE Q7")
@@ -462,7 +462,7 @@ Index: target/linux/ramips/base-files/lib/ramips.sh
  		;;
 Index: target/linux/ramips/base-files/lib/upgrade/platform.sh
 ===================================================================
---- target/linux/ramips/base-files/lib/upgrade/platform.sh	(revision 46160)
+--- target/linux/ramips/base-files/lib/upgrade/platform.sh	(revision 46159)
 +++ target/linux/ramips/base-files/lib/upgrade/platform.sh	(working copy)
 @@ -121,6 +121,7 @@
  	x5 |\
@@ -474,7 +474,7 @@ Index: target/linux/ramips/base-files/lib/upgrade/platform.sh
  	zte-q7 |\
 Index: target/linux/ramips/base-files/etc/board.d/01_leds
 ===================================================================
---- target/linux/ramips/base-files/etc/board.d/01_leds	(revision 46160)
+--- target/linux/ramips/base-files/etc/board.d/01_leds	(revision 46159)
 +++ target/linux/ramips/base-files/etc/board.d/01_leds	(working copy)
 @@ -243,6 +243,19 @@
  		set_usb_led "wr8305rt:usb"
@@ -498,7 +498,7 @@ Index: target/linux/ramips/base-files/etc/board.d/01_leds
  		;;
 Index: target/linux/ramips/base-files/etc/board.d/02_network
 ===================================================================
---- target/linux/ramips/base-files/etc/board.d/02_network	(revision 46160)
+--- target/linux/ramips/base-files/etc/board.d/02_network	(revision 46159)
 +++ target/linux/ramips/base-files/etc/board.d/02_network	(working copy)
 @@ -233,6 +233,7 @@
  		ucidef_add_switch_vlan "switch0" "2" "4 6t"
@@ -521,10 +521,10 @@ Index: target/linux/ramips/base-files/etc/board.d/02_network
 +
  	ht-tm02)
  		lan_mac=$(cat /sys/class/net/eth0/address)
- 		;;s
+ 		;;
 Index: target/linux/ramips/base-files/etc/diag.sh
 ===================================================================
---- target/linux/ramips/base-files/etc/diag.sh	(revision 46160)
+--- target/linux/ramips/base-files/etc/diag.sh	(revision 46159)
 +++ target/linux/ramips/base-files/etc/diag.sh	(working copy)
 @@ -236,6 +236,9 @@
  	na930)
