@@ -1,6 +1,6 @@
 
-BUILDER ?= OpenWrt-ImageBuilder-15.05-rc2-ramips-mt7620.Linux-x86_64
-SDK ?= OpenWrt-SDK-15.05-rc2-ramips-mt7620_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
+BUILDER ?= OpenWrt-ImageBuilder-15.05-rc2-ramips-mt7628.Linux-x86_64
+SDK ?= OpenWrt-SDK-15.05-rc2-ramips-mt7628_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64
 
 OPKG_PACKAGES :=  6in4 6to4 blkid curl ethtool fdisk ip ip6tables-extra ip6tables-mod-nat \
 	ipset iptables-mod-conntrack-extra iptables-mod-extra iptables-mod-ipopt iwinfo \
@@ -18,8 +18,7 @@ OPKG_PACKAGES :=  6in4 6to4 blkid curl ethtool fdisk ip ip6tables-extra ip6table
 	luci-i18n-diag-core-zh-cn luci-i18n-firewall-zh-cn luci-i18n-qos-zh-cn luci-i18n-samba-zh-cn \
 	ppp-mod-pptp ppp-mod-pppol2tp kmod-nls-cp437 kmod-nls-iso8859-1 kmod-nls-utf8 \
 	kmod-crypto-deflate kmod-usb-ohci kmod-usb-printer kmod-nf-nathelper kmod-nf-nathelper-extra
-OPKG_PACKAGES_HC5761 :=
-OPKG_PACKAGES_HC5861 :=
+OPKG_PACKAGES_HC5661A :=
 PREPARED_TARGETS = .check_ib .patched
 
 # A single option for enabling all options
@@ -29,8 +28,7 @@ ifeq ($(FULL),1)
 endif
 # Check each option for selection of packages and dependencies
 ifeq ($(RALINK),1)
-	OPKG_PACKAGES_HC5761 += 8021xd uci2dat kmod-mt7610e
-	OPKG_PACKAGES_HC5861 += 8021xd uci2dat kmod-mt76x2e
+	OPKG_PACKAGES_HC5661A += 8021xd uci2dat kmod-mt7610e
 	PREPARED_TARGETS += .check_sdk .ralink
 endif
 ifeq ($(FEEDS),1)
@@ -48,19 +46,11 @@ define BeforeBuildImage
 	cp -f opkg.conf $(BUILDER)/target/linux/ramips/base-files/etc/opkg.conf
 endef
 
-both: HC5761 HC5861
-
-HC5761: $(PREPARED_TARGETS)
+HC5661A: $(PREPARED_TARGETS)
 	$(call BeforeBuildImage)
-	make -C $(BUILDER) image PROFILE=HiWiFi-HC5761 \
+	make -C $(BUILDER) image PROFILE=HiWiFi-HC5661A \
 		FILES="$(shell cd $(BUILDER); pwd)/target/linux/ramips/base-files" \
-		PACKAGES="$(OPKG_PACKAGES) $(OPKG_PACKAGES_HC5761)"
-
-HC5861: $(PREPARED_TARGETS)
-	$(call BeforeBuildImage)
-	make -C $(BUILDER) image PROFILE=HiWiFi-HC5861 \
-		FILES="$(shell cd $(BUILDER); pwd)/target/linux/ramips/base-files" \
-		PACKAGES="$(OPKG_PACKAGES) $(OPKG_PACKAGES_HC5861)"
+		PACKAGES="$(OPKG_PACKAGES) $(OPKG_PACKAGES_HC5661A)"
 
 .patched:
 	cat ../patches/01-hiwifi-hc5x61.patch ../patches/12-disable-pdnsd.patch > .patching
