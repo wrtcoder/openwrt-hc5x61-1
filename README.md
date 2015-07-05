@@ -53,21 +53,33 @@ OpenWrt Patch for HiWiFi HC5661 / HC5761 / HC5861 (based on "chaos_calmer" branc
     tar jxvf xxx/OpenWrt-SDK-ramips-mt7620_gcc-4.8-linaro_uClibc-0.9.33.2.Linux-x86_64.tar.bz2
       
     # 生成极2固件：
-    make HC5761 FEEDS=1
+    make HC5761 FEEDS=1 RALINK=1
     # 生成极3固件：
-    make HC5861 FEEDS=1
+    make HC5861 FEEDS=1 RALINK=1
     # FEEDS=1 表示包含项目 rssnsj/network-feeds 的功能在内
+    # RALINK=1 表示包含5G驱动在固件中
 
 #### 刷机方法
   以极2为例，openwrt-ramips-mt7620-hiwifi-hc5761-squashfs-sysupgrade.bin 是sysupgrade格式的固件，传到路由器的/tmp下，通过SSH或串口登录路由器Shell，执行以下命令刷入：
 
-  首先最好将U-boot替换成解锁版（不校验固件是否是官方发布的）的，以防止万一刷砖无法直接tftp刷root固件：
+  首先最好将U-boot替换成解锁版（tftp刷机时U-boot不对固件做校验）的，以防止万一刷砖无法直接tftp刷root固件：
 
+    # 极1S
     cd /tmp
-    wget http://rssn.cn/.uboot/HC5761-uboot.bin   # 浏览: http://rssn.cn/.uboot/ 查查找其他型号的
+    wget http://rssn.cn/roms/uboot/HC5661-uboot.bin
+    mtd write HC5661-uboot.bin u-boot
+      
+    # 极2
+    cd /tmp
+    wget http://rssn.cn/roms/uboot/HC5761-uboot.bin
     mtd write HC5761-uboot.bin u-boot
+      
+    # 极3
+    cd /tmp
+    wget http://rssn.cn/roms/uboot/HC5861-uboot.bin
+    mtd write HC5861-uboot.bin u-boot
 
-  如果上面的地址失效，也可以从这里获取： https://github.com/rssnsj/firmware-tools/tree/hiwifi
+  如果上面的地址失效，也可以从这里获取U-boot映像： https://github.com/rssnsj/firmware-tools/tree/hiwifi
 
   然后刷入固件：
 

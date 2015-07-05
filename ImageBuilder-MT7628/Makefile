@@ -93,8 +93,8 @@ HC5661A: $(PREPARED_TARGETS)
 
 # Try extracting ImageBuilder & SDK to current directory
 extract:
-	tar jxvf /var/dl/$(BUILDER).tar.bz2
-	tar jxvf /var/dl/$(SDK).tar.bz2
+	[ -d "$(BUILDER)" ] || tar jxvf /var/dl/$(BUILDER).tar.bz2
+	[ -d "$(SDK)" ] || tar jxvf /var/dl/$(SDK).tar.bz2
 
 help:
 	@echo "Usage:"
