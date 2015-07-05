@@ -639,7 +639,7 @@ Index: target/linux/ramips/base-files/etc/diag.sh
 ===================================================================
 --- target/linux/ramips/base-files/etc/diag.sh	(revision 45974)
 +++ target/linux/ramips/base-files/etc/diag.sh	(working copy)
-@@ -227,6 +227,9 @@
+@@ -226,6 +226,9 @@
  	na930)
  		status_led="na930:blue:power"
  		;;
